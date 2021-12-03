@@ -1,11 +1,10 @@
-## ΠΜΣ - Χαροκόπειο Πανεπιστήμιο
-### Σύστημα Ειδοποίησης, Παρακολούθησης και Διαχείρισης Θερμοκρασίας και Υγρασίας για ένα Data Center
+## Σύστημα Ειδοποίησης, Παρακολούθησης και Διαχείρισης Θερμοκρασίας και Υγρασίας για ένα Data Center
 
 
 **Hardware Components:**
 
-- Raspberry Pi
-- Arduino
+- Raspberry Pi 4
+- ESP8266 microchip
 - Temperature, Humidity and Rain-Drop Sensors
 - Modem
 - WiFi Display Module
@@ -23,3 +22,5 @@
 - Git
 - Ansible
 - Docker
+ 
+

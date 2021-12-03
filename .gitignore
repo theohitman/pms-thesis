@@ -1,2 +1,8 @@
 # Various files
 .DS_Store
+
+# Ignore everything in this directory
+ESP8266/*
+# Except this file
+!ESP8266/README.md
+!ESP8266/Blink_LED.cpp
