@@ -1,13 +1,4 @@
 # Various files
 .DS_Store
 
-# Ignore everything in this directory
-ESP8266/*
-# Except this
-!ESP8266/README.md
-!ESP8266/Blink_LED
-#Ignore Blink_LED subfolders and files
-ESP8266/Blink_LED/*
-# Except src folder
-!ESP8266/Blink_LED/src
 
