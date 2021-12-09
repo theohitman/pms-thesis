@@ -3,6 +3,10 @@
   become: true
 
   tasks:
+    - name: Disable SSH Password Authentication
+      lineinfile: dest=/etc/ssh/sshd_config regexp="^(#\s*)?PasswordAuthentication yes" line="PasswordAuthentication no" state=present
+      notify:
+        - restart sshd
 
     - name: Update apt repo and cache
       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600 
@@ -28,11 +32,15 @@
       shell: sh /home/pi/get-docker.sh
       args:
         creates: /usr/bin/docker
-    # - name: Add pi user to docker group
-    #   shell: usermod -aG docker pi
     - name: Add pi user to docker group
       user: name=pi groups=docker append=yes
     - name: Install docker-compose
       shell: pip3 -v install docker-compose
       args:
         creates: /usr/local/bin/docker-compose
+
+  handlers:
+    - name: restart sshd
+      service:
+        name: sshd
+        state: restarted

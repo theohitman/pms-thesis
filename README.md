@@ -26,9 +26,9 @@
 --- 
 ## Προετοιμασία του Raspberry 
 
-### Εγκατάσταση λειτουργικού
+### 1. Εγκατάσταση λειτουργικού συστήματος
 
-Ο πρώτος είναι χρησιμοποιώντας το [Raspberry Pi Imager](https://www.raspberrypi.com/software/) που έχει γραφικό περιβάλλον και ο δεύτερος είναι από terminal με την εντολή **dd**. Βάζουμε την SD κάρτα στον υπολογιστή μας και τρέχουμε τις παρακάτω εντολές με προσοχή στο να δώσουμε τον σωστό αριθμό δίσκου (rdisk?). 
+Ο πρώτος τρόπος είναι χρησιμοποιώντας το [Raspberry Pi Imager](https://www.raspberrypi.com/software/) που έχει γραφικό περιβάλλον και ο δεύτερος είναι από terminal με την εντολή **dd**. Βάζουμε την SD κάρτα στον υπολογιστή μας και τρέχουμε τις παρακάτω εντολές. Με την πρώτη εντολή βλέπουμε τους δίσκους στον υπολογιστή μας. Στη συνέχεια κάνουμε unmount την SD κάρτα και τέλος με την εντολή dd γράφουμε το image στην SD κάρτα. (ΠΡΟΣΟΧΗ να δώσουμε τον σωστό αριθμό δίσκου (rdisk?) στην dd. 
 
 ```bash
 diskutil list
@@ -36,21 +36,19 @@ diskutil unmountDisk /dev/disk4
 dd if=2021-10-30-raspios-bullseye-armhf-lite.img of=/dev/rdisk4 bs=1m
 ```
 
-### Ενεργοποίηση SSH
+### 2. Ενεργοποίηση SSH
 
-By default είναι κλειστό το ssh στο raspberry. Το ενεργοποιούμε δημιουργώντας ένα κενό αρχείο με όνομα ssh στο root folder. Unmount την SD κάρτα και μπορούμε να τη βάλουμε στο raspberry και να μπουτάρουμε.  
+By default είναι κλειστό το ssh στο raspberry. Το ενεργοποιούμε δημιουργώντας ένα κενό αρχείο με όνομα ssh στο root folder. Κάνουμε unmount την SD κάρτα και την βάζουμε στο raspberry.  
 
 ```bash
 touch /Volumes/boot/ssh
 diskutil unmountDisk /dev/disk4
 ```
 
-### Εγκατάσταση του SSH Κey και απενεργοποίηση του SSH με κωδικό
+### 3. Εγκατάσταση του SSH Κey 
 
-Με αυτό τον τρόπο θα κάνουμε login στο raspberry χωρίς να εισάγουμε κωδικό πρόσβασης αλλά με το ιδιωτικό μας κλειδί
+Με αυτό τον τρόπο θα κάνουμε login στο raspberry χωρίς να εισάγουμε κωδικό πρόσβασης αλλά με το ιδιωτικό μας κλειδί. [How To Set up SSH Keys on a Linux / Unix System](https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/)
 
 ```bash
 ssh-copy-id pi@raspberrypi
 ```
-
-Αφού κάνουμε login στο raspberry πάμε στο αρχείο **/etc/ssh/sshd_config** και κάνουμε uncomment και no το **PasswordAuthentication**
