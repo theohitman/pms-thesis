@@ -31,7 +31,7 @@
 1. Raspberry Pi, SD card, καλώδιο ethernet και τροφοδοσία
 2. Download [Raspberry Pi OS](https://www.raspberrypi.com/software/)
 3. SSH key pair ([How To Set up SSH Keys on a Linux / Unix System](https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/)) 
-4. Ansible [Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html#installation-guide)
+4. Ansible ([Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html#installation-guide))
 
 ### 1. Εγκατάσταση λειτουργικού συστήματος
 
