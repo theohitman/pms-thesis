@@ -62,7 +62,8 @@ ssh-copy-id pi@raspberrypi
 
 ### 4. Εγκατάσταση Docker και Docker-Compose
 
-Με το παρακάτω playbook γίνονται οι εξής ενέργειες στο raspberry
+
+Με το παρακάτω playbook γίνονται οι εξής ενέργειες στο raspberry:
 
 * Απενεργοποίηση του password authentication. SSH μόνο με κλειδί (SSH key pair)
 * Αναβάθμιση όλων των πακέτων του raspberry
@@ -73,4 +74,10 @@ ssh-copy-id pi@raspberrypi
 
 ```bash
 ansible-playbook playbooks/docker-install.yml
+```
+
+Αν βγάλει failed ελέγχουμε την ώρα στο raspberry με την εντολή **date** και αν είναι λάθος την σετάρουμε χειροκίνητα. Έπειτα δοκιμάζουμε πάλι να τρέξουμε το playbook. 
+
+```bash
+sudo date -s '2021-12-12 13:05:00'
 ```

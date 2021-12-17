@@ -22,7 +22,7 @@
 
     - name: Install a list of packages
       apt:
-        name: [libffi-dev, libssl-dev, python3, python3-pip, python3-dev]
+        name: [libffi-dev, libssl-dev, python3, python3-pip, python3-dev, vim]
     
     - name: Get docker intallation script #Run if file /home/pi/get-docker.sh does not exist    
       shell: curl -fsSL https://get.docker.com -o get-docker.sh
@@ -34,10 +34,12 @@
         creates: /usr/bin/docker
     - name: Add pi user to docker group
       user: name=pi groups=docker append=yes
+
     - name: Install docker-compose
-      shell: pip3 -v install docker-compose
-      args:
-        creates: /usr/local/bin/docker-compose
+      pip: 
+        name: docker-compose
+        # executable: pip3
+        # state: latest
 
   handlers:
     - name: restart sshd
