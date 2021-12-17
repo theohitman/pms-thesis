@@ -1,0 +1,66 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Update apt repo and cache
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600 
+    - name: Upgrade all packages
+      apt: upgrade=dist force_apt_get=yes
+
+    - name: Install Packages
+      apt: 
+        name: [dnsmasq, hostapd]
+    - name: Stop services
+      service:
+        name: "{{ item }}" 
+        state: stopped
+      with_items:
+        - 'dnsmasq'
+        - 'hostapd'
+
+    - name: Configure a static IP for the wlan0 interface
+      blockinfile:
+        path: /etc/dhcpcd.conf
+        block: |
+          interface wlan0
+          nohook wpa_supplicant
+          static ip_address=192.168.50.1/24
+          static routers=192.168.50.1   
+
+    - name: Configure the DHCP server (dnsmasq)
+      copy: 
+        src: ../files/dnsmasq.conf
+        dest: /etc/dnsmasq.conf
+        backup: yes
+      notify: restart dnsmasq  
+
+    - name: Configure the access point (hostapd) 1/2
+      copy:
+        src: ../files/hostapd.conf
+        dest: /etc/hostapd/hostapd.conf
+      notify: restart hostapd  
+    - name: Configure the access point (hostapd) 2/2
+      lineinfile:
+        path: /etc/default/hostapd
+        line: DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+    - name: Start & Unmask Services
+      service:
+        enabled: yes
+        masked: no
+        name: "{{ item }}" 
+        state: started
+      with_items:
+        - 'dnsmasq'
+        - 'hostapd'
+
+  handlers:
+    - name: restart hostapd
+      service:
+        name: hostapd
+        state: restarted
+    - name: restart dnsmasq
+      service:
+        name: dnsmasq
+        state: restarted    
