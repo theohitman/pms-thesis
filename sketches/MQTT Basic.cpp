@@ -27,7 +27,7 @@ const char* ssid = "........";
 const char* password = "........";
 const char* mqtt_server = "broker.mqtt-dashboard.com";
 
-WiFiClient espClient;
+WiFiClient espClient;  // Initialize espClient and create three variables
 PubSubClient client(espClient);
 unsigned long lastMsg = 0;
 #define MSG_BUFFER_SIZE	(50)
