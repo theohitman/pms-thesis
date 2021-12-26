@@ -51,3 +51,7 @@ http://arduino.esp8266.com/stable/package_esp8266com_index.json
 ### MQTT LED
 
 Διαχείριση LED που είναι συνδεδεμένα σε ESP8266 με MQTT. Ανάλογα με το MQTT μήνυμα που θα λάβει ο client, θα ανάψει ή θα σβήσει το αντίστοιχο LED. Στον φάκελο flows υπάρχει και το flow για διαχείριση των LEDS από το Node-Red Dashboard.   
+
+### MQTT DHT11
+
+Ένας DHT11 αιθητήρας που είναι συνδεδεμένος πάνω στο ESP8266 στέλνει τις ενδείξεις του με MQTT μηνύματα στον Broker που είναι εγκατεστημένος στο Raspberry. Στον φάκελο flows υπάρχει και το flow για την απεικόνιση των ενδείξεων στο Node-Red. 

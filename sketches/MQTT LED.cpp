@@ -1,12 +1,13 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-#define LED_PIN D1
+#define LED_RED D1
+#define LED_GREEN D2
 
 
 const char* ssid = "........";
 const char* password = "........";
-const char* mqtt_server = "broker.mqtt-dashboard.com";
+const char* mqtt_server = "broker-ip-address";
 
 
 WiFiClient espClient;  // Initialize espClient and create three variables
@@ -113,8 +114,8 @@ void reconnect() {
       Serial.print("failed, rc=");
       Serial.print(client.state());
       Serial.println(" try again in 5 seconds");
-      // Wait 6 seconds before retrying
-      delay(6000);
+      // Wait 5 seconds before retrying
+      delay(5000);
     }
   }
 } 

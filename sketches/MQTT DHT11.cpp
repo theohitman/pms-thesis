@@ -1,45 +1,89 @@
-#include <Adafruit_Sensor.h>
-#include <DHT.h>
-#include <DHT_U.h>
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+#include "DHT.h"
 
-#define DHTPIN 2
-#define DHTTYPE DHT11 
+#define DHTTYPE DHT11   // DHT 11
+
+const char* ssid = "........";
+const char* password = "........";
+const char* mqtt_server = "broker-ip-address";
 
 
-DHT_Unified dht(DHTPIN, DHTTYPE);
+WiFiClient espClient;
+PubSubClient client(espClient);
 
+
+const int DHTPin = 0;
+
+
+DHT dht(DHTPin, DHTTYPE);
+
+// Timers auxiliar variables
 long now = millis();
 long lastMeasure = 0;
 
 
+void setup_wifi() {
+  delay(10);
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.print("WiFi connected - ESP IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+
 void setup() {
-  Serial.begin(115200);
- 
+  
   dht.begin();
+  
+  Serial.begin(115200);
+  setup_wifi();
+  client.setServer(mqtt_server, 1883);
 
 }
 
-void loop() {                    
-  delay(1000);           // Delay between measurements.
-  // Get temperature event and print its value.
-  sensors_event_t event;
-  dht.temperature().getEvent(&event);
-  if (isnan(event.temperature)) {
-    Serial.println(F("Error reading temperature!"));
+void loop() {
+
+  if(!client.loop())
+    client.connect("ESP8266Client");
+
+  now = millis();
+  // Publishes new temperature and humidity every 30 seconds
+  if (now - lastMeasure > 30000) {
+    lastMeasure = now;
+    float h = dht.readHumidity();
+    float t = dht.readTemperature();
+
+    // Check if any reads failed and exit early (to try again).
+    if (isnan(h) || isnan(t)) {
+      Serial.println("Failed to read from DHT sensor!");
+      return;
+    }
+
+
+    static char temperatureTemp[7];
+    dtostrf(t, 6, 2, temperatureTemp);
+    
+    
+    static char humidityTemp[7];
+    dtostrf(h, 6, 2, humidityTemp);
+
+    // Publishes Temperature and Humidity values
+    client.publish("home/temperature", temperatureTemp);
+    client.publish("home/humidity", humidityTemp);
+    
+    Serial.print("Humidity: ");
+    Serial.print(h);
+    Serial.print(" %\t Temperature: ");
+    Serial.print(t);
+    Serial.print(" *C ");
+    Serial.println();
   }
-  else {
-    Serial.print(F("Temperature: "));
-    Serial.print(event.temperature);
-    Serial.println(F("°C"));
-  }
-  // Get humidity event and print its value.
-  dht.humidity().getEvent(&event);
-  if (isnan(event.relative_humidity)) {
-    Serial.println(F("Error reading humidity!"));
-  }
-  else {
-    Serial.print(F("Humidity: "));
-    Serial.print(event.relative_humidity);
-    Serial.println(F("%"));
-  }
-}
+} 
