@@ -60,7 +60,15 @@ diskutil unmountDisk /dev/disk4
 ssh-copy-id pi@raspberrypi
 ```
 
-### 4. Εγκατάσταση Docker και Docker-Compose
+### 4. Ορισμός Τοποθεσίας
+
+Αφού κάνουμε login στο raspberry τρέχουμε την παρακάτω εντολή ορίζοντας έτσι την τοποθεσία μας ώστε να έχει το raspberry την σωστή ώρα. 
+
+```bash
+sudo timedatectl set-timezone Europe/Athens
+```
+
+### 5. Εγκατάσταση Docker και Docker-Compose
 
 
 Με το παρακάτω playbook γίνονται οι εξής ενέργειες στο raspberry:
@@ -74,10 +82,4 @@ ssh-copy-id pi@raspberrypi
 
 ```bash
 ansible-playbook playbooks/docker-install.yml
-```
-
-Αν βγάλει failed ελέγχουμε την ώρα στο raspberry με την εντολή **date** και αν είναι λάθος την σετάρουμε χειροκίνητα. Έπειτα δοκιμάζουμε πάλι να τρέξουμε το playbook. 
-
-```bash
-sudo date -s '2021-12-12 13:05:00'
 ```
