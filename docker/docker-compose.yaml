@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   node-red:
-    image: nodered/node-red:2.1.6
+    build: ./nodered
     container_name: nodered
     restart: always
     environment:
@@ -13,7 +13,7 @@ services:
       - iot-net
     volumes:
       - ./nodered/data:/data
-  mosquitto:
+  eclipse-mosquitto:
     image: eclipse-mosquitto:2.0.14
     container_name: mosquitto
     restart: always
