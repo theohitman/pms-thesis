@@ -6,19 +6,19 @@
 
 - Raspberry Pi 4
 - ESP8266 microchip
-- Temperature, Humidity and Rain-Drop Sensors
-- Modem
-- ~~WiFi Display Module~~
+- DHT11 Temperature & Humidity Sensors
+- Rain-Drop Sensors
+- Motion & Contact Sensors
 
 **Software Components:**
 
 - Raspberry Pi OS
 - Database (influxdb)
-- Web Server (nginx)
-- Firewall (OpenBSD)
-- MQTT Server
-- Application Server (Gunicorn)
-- Certificate Authority
+- Visualization (grafana)
+- MQTT Server (mosquitto)
+- Orchestrator (node-red)
+- ~~Firewall (OpenBSD)~~
+- ~~Certificate Authority~~
 - Git
 - Ansible
 - Docker
@@ -35,12 +35,19 @@
 
 ### 1. Εγκατάσταση λειτουργικού συστήματος
 
-Ο πρώτος τρόπος είναι χρησιμοποιώντας το [Raspberry Pi Imager](https://www.raspberrypi.com/software/) που έχει γραφικό περιβάλλον και ο δεύτερος είναι από terminal με την εντολή **dd**. Βάζουμε την SD κάρτα στον υπολογιστή μας και τρέχουμε τις παρακάτω εντολές. Με την πρώτη εντολή βλέπουμε τον αριθμό του δίσκου που έχει πάρει η κάρτα. Στη συνέχεια την κάνουμε unmount και με την εντολή dd γράφουμε το image στην SD κάρτα. (ΠΡΟΣΟΧΗ να δώσουμε τον σωστό αριθμό δίσκου (rdisk?) στην εντολή dd. 
+Ο πρώτος τρόπος είναι χρησιμοποιώντας το [Raspberry Pi Imager](https://www.raspberrypi.com/software/) που έχει γραφικό περιβάλλον και ο δεύτερος είναι από terminal με την εντολή **dd**. Βάζουμε την SD κάρτα στον υπολογιστή μας και τρέχουμε τις παρακάτω εντολές. Με την πρώτη εντολή βλέπουμε τον αριθμό του δίσκου που έχει πάρει η κάρτα. Στη συνέχεια την κάνουμε unmount και με την εντολή dd γράφουμε το image στην SD κάρτα. (ΠΡΟΣΟΧΗ να δώσουμε τον σωστό αριθμό δίσκου (rdisk? or sd*) στην εντολή dd. 
 
+MacOS
 ```bash
 diskutil list
 diskutil unmountDisk /dev/disk4
 dd if=2021-10-30-raspios-bullseye-armhf-lite.img of=/dev/rdisk4 bs=1m
+```
+
+Linux
+```bash
+lsblk
+dd if=2021-10-30-raspios-bullseye-armhf-lite.img of=/dev/sdc bs=1m
 ```
 
 ### 2. Ενεργοποίηση SSH
@@ -49,7 +56,6 @@ By default το ssh είναι απενεργοποιημένο στο raspberry
 
 ```bash
 touch /Volumes/boot/ssh
-diskutil unmountDisk /dev/disk4
 ```
 
 ### 3. Εγκατάσταση του SSH Κey 
