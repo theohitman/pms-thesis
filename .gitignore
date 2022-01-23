@@ -1,5 +1,5 @@
 # Various files
 .DS_Store
-
+.env
 test_playbook.yml
 
