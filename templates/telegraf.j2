@@ -63,7 +63,7 @@
   ## Example: America/Chicago
   # log_with_timezone = ""
   ## Override default hostname, if empty use os.Hostname()
-  hostname = "Raspberry"
+  hostname = ""
   ## If set to true, do no set the "host" tag in the telegraf agent.
   omit_hostname = false
 
@@ -74,10 +74,10 @@
   ## urls will be written to each interval.
   # urls = ["unix:///var/run/influxdb.sock"]
   # urls = ["udp://127.0.0.1:8089"]
-  urls = ["http://influxdb:8086"]
+  urls = ["http://localhost:8086"]
   ## The target database for metrics; will be created as needed.
   ## For UDP url endpoint database needs to be configured on server side.
-  database = "telegraf_db"
+  database = "{{ influxdb_database }}"
   ## The value of this tag will be used to determine the database.  If this
   ## tag is not set the 'database' option is used as the default.
   # database_tag = ""
@@ -101,8 +101,8 @@
   ## Timeout for HTTP messages.
   # timeout = "5s"
   ## HTTP Basic Auth
-  username = "hua"
-  password = "itp20103"
+  username = "{{ influxdb_username }}"
+  password = "{{ influxdb_password }}"
   ## HTTP User-Agent
   # user_agent = "telegraf"
   ## UDP payload size is the maximum packet size to send.
@@ -196,3 +196,9 @@
   name_override = "cpu_temperature"
   data_format = "value"
   data_type = "integer"
+
+[[inputs.exec]]
+  commands = ["/usr/bin/vcgencmd measure_temp"]
+  name_override = "gpu_temperature"
+  data_format = "grok"
+  grok_patterns = ["%{NUMBER:value:float}"]

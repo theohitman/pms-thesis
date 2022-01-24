@@ -5,7 +5,7 @@
 **Hardware Components:**
 
 - Raspberry Pi 4
-- ESP8266 microchip
+- ESP8266 microchips
 - DHT11 Temperature & Humidity Sensors
 - Rain-Drop Sensors
 - Motion & Contact Sensors
@@ -28,10 +28,10 @@
 
 Προαπαιτούμενα: 
 
-1. Raspberry Pi, SD card, καλώδιο ethernet και τροφοδοσία
-2. Download [Raspberry Pi OS](https://www.raspberrypi.com/software/)
-3. SSH key pair ([How To Set up SSH Keys on a Linux / Unix System](https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/)) 
-4. Ansible ([Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html#installation-guide))
+- Raspberry Pi, SD card, καλώδιο ethernet και τροφοδοσία
+- Download [Raspberry Pi OS](https://www.raspberrypi.com/software/)
+- SSH key pair ([How To Set up SSH Keys on a Linux / Unix System](https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/)) 
+- Ansible ([Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html#installation-guide))
 
 ### 1. Εγκατάσταση λειτουργικού συστήματος
 

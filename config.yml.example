@@ -1,0 +1,5 @@
+---
+# Database & Credentials for Telegraf Agent to write metrics
+influxdb_database: 'database'
+influxdb_username: 'username'
+influxdb_password: 'password'

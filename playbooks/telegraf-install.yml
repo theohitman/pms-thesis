@@ -1,0 +1,48 @@
+---
+- hosts: raspberries
+  become: true
+
+  tasks:
+    - name: Load Configuration Variables
+      include_vars: ../config.yml
+
+    - name: Add apt key
+      apt_key:
+        url: https://repos.influxdata.com/influxdb.key
+        state: present
+    
+    - name: Add repository
+      apt_repository:
+        repo: deb https://repos.influxdata.com/debian bullseye stable
+        state: present
+
+    - name: Install Telegraf
+      apt:
+        name: telegraf
+        state: present
+        update_cache: true
+
+    - name: Make sure telegraf is running
+      systemd:
+        state: started
+        name: telegraf
+
+    - name: Copy configuration
+      template: 
+        src: ../templates/telegraf.j2
+        dest: /etc/telegraf/telegraf.conf
+      notify: Restart telegraf 
+
+    - name: Add telegraf to video group
+      user:
+        name: telegraf
+        groups: video
+        append: yes  
+      notify: Restart telegraf 
+
+  handlers:
+    - name: Restart telegraf
+      systemd:
+        name: telegraf
+        state: restarted    
+         

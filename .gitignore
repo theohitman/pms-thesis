@@ -1,5 +1,7 @@
 # Various files
 .DS_Store
 .env
+deploy-stack.yml
 test_playbook.yml
+config.yml
 
