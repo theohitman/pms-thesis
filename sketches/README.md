@@ -38,6 +38,8 @@ http://arduino.esp8266.com/stable/package_esp8266com_index.json
 * GND από το DHT11 στο GND του ESP8266
 * DOUT από το DHT11 στο D1 του ESP8266
 
+<img src="/images/DHT11_Console1.png" width=200>
+
 Αφού κάνουμε **Verify** και **Upload** για να δούμε τις μετρήσεις ανοίγουμε το **Serial Monitor** από τα Tools. 
 
 ### WiFi Station Mode
