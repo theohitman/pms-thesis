@@ -32,15 +32,11 @@ http://arduino.esp8266.com/stable/package_esp8266com_index.json
 
 ### DHT11 Console
 
-Δείχνει τις μετρήσεις θερμοκρασίας και υγρασίας του αισθητήρα DHT11 στην σειριακή κονσόλα του Arduino IDE. Το Sketch χρειάζεται τις βιβλιοθήκες DHT Sensor Library και Adafruit Unified Sensor της Adafruit. Για να τις προσθέσουμε πάμε από τα Tools > Manage Libraries... κάνουμε αναζήτηση και Install την τελευταία έκδοση. Η συνδεσμολογία των Pins για να δουλέψει ο κώδικας είναι:
+Δείχνει τις μετρήσεις θερμοκρασίας και υγρασίας του αισθητήρα DHT11 στην σειριακή κονσόλα του Arduino IDE. Το Sketch χρειάζεται τις βιβλιοθήκες DHT Sensor Library και Adafruit Unified Sensor της Adafruit. Για να τις προσθέσουμε πάμε από τα Tools > Manage Libraries... κάνουμε αναζήτηση και Install την τελευταία έκδοση. Η συνδεσμολογία των Pins για να δουλέψει ο κώδικας φαίνεται στο σχεδιάγραμμα.
 
-* VCC από το DHT11 στο 3V3 του ESP8266
-* GND από το DHT11 στο GND του ESP8266
-* DOUT από το DHT11 στο D1 του ESP8266
+<img src="/images/DHT11_Console.png" width=400>
 
-<img src="/images/DHT11_Console1.png" width=200>
-
-Αφού κάνουμε **Verify** και **Upload** για να δούμε τις μετρήσεις ανοίγουμε το **Serial Monitor** από τα Tools. 
+Αφού κάνουμε **Verify** και **Upload** τον κώδικα για να δούμε τις μετρήσεις ανοίγουμε το **Serial Monitor** από τα Tools. 
 
 ### WiFi Station Mode
 
@@ -54,6 +50,8 @@ http://arduino.esp8266.com/stable/package_esp8266com_index.json
 ### MQTT LED
 
 Διαχείριση LED που είναι συνδεδεμένα σε ESP8266 με MQTT. Ανάλογα με το MQTT μήνυμα που θα λάβει ο client, θα ανάψει ή θα σβήσει το αντίστοιχο LED. Στον φάκελο flows υπάρχει και το flow για διαχείριση των LEDS από το Node-Red Dashboard.   
+
+<img src="/images/MQTT_LED.png" width=400>
 
 ### MQTT DHT11
 
@@ -72,4 +70,6 @@ http://arduino.esp8266.com/stable/package_esp8266com_index.json
 
 ## FINAL
 
-Είναι το τελικό sketch που διασυνδέει όλους τους αισθητήρες, LED και buzzer με το ESP8266. Η περιγραφή του κώδικα και της λειτουργίας του θα γίνει στο κυρίως σώμα της εργασίας μου.
+Είναι το τελικό sketch που διασυνδέει όλους τους αισθητήρες, LED και buzzer με το ESP8266. Δεν είναι απαραίτητο να χρησιμοποιήσουμε όλα τα GPIO pins του microcontroller. Η λογική είναι ότι το EPS8266 έχει τον απαραίτητο κώδικα να υποστηρίξει τους αισθητήρες και τα led/buzzer που φαίνονται στο σχεδιάγραμμα και εμείς μπορούμε να επιλέξουμε ποια από αυτά θα συνδέσουμε. Η περιγραφή του κώδικα και της λειτουργίας του θα γίνει στο κυρίως σώμα της εργασίας μου.
+
+<img src="/images/final.png" width=600>
