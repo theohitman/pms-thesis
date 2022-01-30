@@ -9,6 +9,7 @@
 - DHT11 Temperature & Humidity Sensors
 - Rain-Drop Sensors
 - Motion & Contact Sensors
+- LEDs & Buzzer
 
 **Software Components:**
 
@@ -26,16 +27,19 @@
 --- 
 ## Α' Μέρος - Προετοιμασία του Raspberry 
 
+Στο πρώτο μέρος υλοποίησης θα προετοιμάσουμε το raspberry ώστε να μπορέσει να υποδεχθεί το σύνολο των εφαρμογών που απαιτούνται για το project. Ξεκινάμε με την εγκατάσταση του βασικού λειτουργικού συστήματος **Raspberry Pi OS Lite**. Στη συνέχεια ενεργοποιούμε την απομακρυσμένη πρόσβαση με **SSH**. Αναβαθμίζουμε το σύνολο των πακέτων που υποστηρίζονται από το λειτουργικό και τέλος γίνεται η εγκατάσταση του **Docker** και **Docker-Compose**. 
+
+
 Προαπαιτούμενα: 
 
 - Raspberry Pi, SD card, καλώδιο ethernet και τροφοδοσία
-- Download [Raspberry Pi OS](https://www.raspberrypi.com/software/)
+- [Raspberry Pi OS](https://www.raspberrypi.com/software/)
 - SSH key pair ([How To Set up SSH Keys on a Linux / Unix System](https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/)) 
 - Ansible ([Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html#installation-guide))
 
 ### 1. Εγκατάσταση λειτουργικού συστήματος
 
-Ο πρώτος τρόπος είναι χρησιμοποιώντας το [Raspberry Pi Imager](https://www.raspberrypi.com/software/) που έχει γραφικό περιβάλλον και ο δεύτερος είναι από terminal με την εντολή **dd**. Βάζουμε την SD κάρτα στον υπολογιστή μας και τρέχουμε τις παρακάτω εντολές. Με την πρώτη εντολή βλέπουμε τον αριθμό του δίσκου που έχει πάρει η κάρτα. Στη συνέχεια την κάνουμε unmount και με την εντολή dd γράφουμε το image στην SD κάρτα. (ΠΡΟΣΟΧΗ να δώσουμε τον σωστό αριθμό δίσκου (rdisk? or sd*) στην εντολή dd. 
+Ένας τρόπος να γίνει η εγκατάσταση του λειτουργικού συστήματος είναι χρησιμοποιώντας το [Raspberry Pi Imager](https://www.raspberrypi.com/software/) που έχει γραφικό περιβάλλον ενώ ένας δεύτερος τρόπος είναι από terminal με την εντολή **dd**. Βάζουμε την SD κάρτα στον υπολογιστή μας και τρέχουμε τις παρακάτω εντολές. Με την πρώτη εντολή βλέπουμε τον αριθμό του δίσκου που έχει πάρει η κάρτα SD. Στη συνέχεια την κάνουμε unmount και με την εντολή dd γράφουμε το image στην SD κάρτα. (ΠΡΟΣΟΧΗ να δώσουμε τον σωστό αριθμό δίσκου (rdisk? or sd*) στην εντολή dd. 
 
 MacOS
 ```bash
@@ -90,8 +94,10 @@ sudo timedatectl set-timezone Europe/Athens
 ansible-playbook playbooks/docker-install.yml
 ```
 
-
+--- 
 ## Β' Μέρος - Προετοιμασία του ESP8266 
+
+Σε αυτό το μέρος θα πρέπει να γίνει η **διασύνδεση** των components (αισθητήρες, led, κτλ.) με το ESP8266 καθώς και ο **προγραμματισμός** του. Στον φάκελο [/sketches](https://github.com/theohitman/pms-thesis/tree/main/sketches) θα βρείτε οδηγίες για την εγκατάσταση της εφαρμογής Arduino IDE, τον κώδικα και τον τρόπο που τον φορτώνουμε στο ESP8266 καθώς και σχεδιαγράμματα με την συνδεσμολογία των επιμέρους components. 
 
 Προαπαιτούμενα: 
 
@@ -102,8 +108,9 @@ ansible-playbook playbooks/docker-install.yml
 
 <img src="images/DHT_Sensor.jpeg" width=200> <img src="images/Rain_Sensor.jpg" width=200> <img src="images/PIR_Sensor.jpg" width=200> <img src="images/Reed_Switch.jpeg" width=200>
 
-- Leds διαφορετικών χρωμάτων και ένα buzzer
+- Leds διαφορετικών χρωμάτων και buzzer
 
-<img src="images/LEDs.jpg" width=200><img src="images/buzzer.jpg" width=100>
+<img src="images/LEDs.jpg" width=200> <img src="images/buzzer.jpg" width=135>
 
-## Γ' Μέρος - Προετοιμασία του Raspberry 
+--- 
+## Γ' Μέρος - Stack Deployment
