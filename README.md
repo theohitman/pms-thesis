@@ -89,3 +89,19 @@ sudo timedatectl set-timezone Europe/Athens
 ```bash
 ansible-playbook playbooks/docker-install.yml
 ```
+
+
+## Β' Μέρος - Προετοιμασία του ESP8266 
+
+Προαπαιτούμενα: 
+
+- ESP8266 microchips
+- Καλώδιο microusb to usb
+- Arduino IDE
+- Αισθητήρες Humidity Sensor DHT11, Rain Sensor Module, PIR Sensor Module HC-SR501, Magnetic Reed Switch (δεν είναι απαραίτητο να έχουμε όλους τους αισθητήρες)
+- Leds διαφορετικών χρωμάτων και ένα buzzer
+
+![](images/LEDs.jpg)
+<img src="images/buzzer.jpg">
+
+## Γ' Μέρος - Προετοιμασία του Raspberry 
