@@ -99,7 +99,9 @@ ansible-playbook playbooks/docker-install.yml
 - Καλώδιο microusb to usb
 - Arduino IDE
 - Αισθητήρες Humidity Sensor DHT11, Rain Sensor Module, PIR Sensor Module HC-SR501, Magnetic Reed Switch (δεν είναι απαραίτητο να έχουμε όλους τους αισθητήρες)
-<img src="images/DHT_Sensor.jpeg" width=200><img src="images/Rain_Sensor.jpg" width=200>
+
+<img src="images/DHT_Sensor.jpeg" width=200> <img src="images/Rain_Sensor.jpg" width=200>
+
 - Leds διαφορετικών χρωμάτων και ένα buzzer
 
 <img src="images/LEDs.jpg" width=200><img src="images/buzzer.jpg" width=100>
