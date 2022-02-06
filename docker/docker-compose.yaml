@@ -1,6 +1,7 @@
 version: "3.8"
 
 services:
+
   node-red:
     build: ./nodered
     container_name: nodered
@@ -13,6 +14,7 @@ services:
       - iot-net
     volumes:
       - ./nodered/data:/data
+
   eclipse-mosquitto:
     image: eclipse-mosquitto:2.0.14
     container_name: mosquitto
@@ -25,6 +27,7 @@ services:
       - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
       - ./mosquitto/data:/mosquitto/data
       - ./mosquitto/log:/mosquitto/log
+
   influxdb:
     image: influxdb:1.8.10
     container_name: influxdb
@@ -40,22 +43,7 @@ services:
       - ./influxdb/data:/var/lib/influxdb
       - ./influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
       - ./influxdb/init:/docker-entrypoint-initdb.d
-  # telegraf:
-  #   image: telegraf:1.21.2
-  #   container_name: telegraf
-  #   restart: always
-  #   environment:
-  #     - HOST_PROC=/rootfs/proc
-  #     - HOST_SYS=/rootfs/sys
-  #     - HOST_ETC=/rootfs/etc
-  #   networks:
-  #     - iot-net
-  #   volumes:
-  #     - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #     - /sys:/rootfs/sys:ro
-  #     - /proc:/rootfs/proc:ro
-  #     - /etc:/rootfs/etc:ro
+
   grafana:
     image: grafana/grafana:8.3.4
     container_name: grafana
@@ -74,6 +62,7 @@ services:
     user: "0" #run grafana as root user of raspberry or mount volume instead of bind mount   
     depends_on:
       - influxdb
+      
   portainer:
     image: portainer/portainer-ce:2.9.3
     container_name: portainer

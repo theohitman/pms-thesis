@@ -6,10 +6,10 @@
 
 - Raspberry Pi 4
 - ESP8266 microchips
-- DHT11 Temperature & Humidity Sensors
+- Temperature & Humidity Sensors
 - Rain-Drop Sensors
 - Motion & Contact Sensors
-- LEDs & Buzzer
+- LEDs & Buzzers
 
 **Software Components:**
 
@@ -18,8 +18,6 @@
 - Visualization (grafana)
 - MQTT Server (mosquitto)
 - Orchestrator (node-red)
-- ~~Firewall (OpenBSD)~~
-- ~~Certificate Authority~~
 - Git
 - Ansible
 - Docker
@@ -36,6 +34,7 @@
 - [Raspberry Pi OS](https://www.raspberrypi.com/software/)
 - SSH key pair ([How To Set up SSH Keys on a Linux / Unix System](https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/)) 
 - Ansible ([Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html#installation-guide))
+- Git ([Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git))
 
 ### 1. Εγκατάσταση λειτουργικού συστήματος
 
@@ -64,7 +63,7 @@ touch /Volumes/boot/ssh
 
 ### 3. Εγκατάσταση του SSH Κey 
 
-Αφού γίνει boot το raspberry τρέχουμε την παρακάτω εντολή. Έτσι θα μπορούμε να κάνουμε login στο raspberry χωρίς να εισάγουμε κωδικό πρόσβασης αλλά με το ιδιωτικό μας κλειδί (SSH key pair). 
+Αφού γίνει boot το raspberry τρέχουμε την παρακάτω εντολή. Έτσι θα μπορούμε να κάνουμε login στο raspberry χωρίς να εισάγουμε κωδικό πρόσβασης αλλά με το ιδιωτικό μας κλειδί (SSH key pair). Αν δεν υπάρχει local dns στην υποδομή μας αντί για raspberrypi βάζουμε την IP διεύθυνση που πήρε το raspberry. 
 
 ```bash
 ssh-copy-id pi@raspberrypi
@@ -72,15 +71,16 @@ ssh-copy-id pi@raspberrypi
 
 ### 4. Ορισμός Τοποθεσίας
 
-Αφού κάνουμε login στο raspberry τρέχουμε την παρακάτω εντολή ορίζοντας έτσι την τοποθεσία μας ώστε να έχει το raspberry την σωστή ώρα. 
+Κάνουμε login στο raspberry τρέχουμε την παρακάτω εντολή ορίζοντας έτσι την τοποθεσία μας ώστε να έχει το raspberry την σωστή ώρα. 
 
 ```bash
+ssh pi@raspberrypi
 sudo timedatectl set-timezone Europe/Athens
 ```
 
 ### 5. Εγκατάσταση Docker και Docker-Compose
 
-
+Από τον υπολογιστή μας κατεβάζουμε το project από το git τοπικά και τρέχουμε το playbook. 
 Με το παρακάτω playbook γίνονται οι εξής ενέργειες στο raspberry:
 
 * Απενεργοποίηση του password authentication. SSH μόνο με κλειδί (SSH key pair)
@@ -91,13 +91,15 @@ sudo timedatectl set-timezone Europe/Athens
 * Εγκατάσταση docker-compose
 
 ```bash
+git clone https://github.com/theohitman/pms-thesis.git
+cd pms-thesis
 ansible-playbook playbooks/docker-install.yml
 ```
 
 --- 
 ## Β' Μέρος - Προετοιμασία του ESP8266 
 
-Σε αυτό το μέρος θα πρέπει να γίνει η **διασύνδεση** των components (αισθητήρες, led, κτλ.) με το ESP8266 καθώς και ο **προγραμματισμός** του. Στον φάκελο [/sketches](https://github.com/theohitman/pms-thesis/tree/main/sketches) θα βρείτε οδηγίες για την εγκατάσταση της εφαρμογής Arduino IDE, τον κώδικα και τον τρόπο που τον φορτώνουμε στο ESP8266 καθώς και σχεδιαγράμματα με την συνδεσμολογία των επιμέρους components. 
+Σε αυτό το μέρος θα γίνει η **διασύνδεση** των components (αισθητήρων, leds, κτλ.) με το ESP8266 καθώς και ο **προγραμματισμός** του. 
 
 Προαπαιτούμενα: 
 
@@ -111,6 +113,8 @@ ansible-playbook playbooks/docker-install.yml
 - Leds διαφορετικών χρωμάτων και buzzer
 
 <img src="images/LEDs.jpg" width=200> <img src="images/buzzer.jpg" width=135>
+
+Στον φάκελο [sketches](https://github.com/theohitman/pms-thesis/tree/main/sketches) θα βρείτε οδηγίες για την εγκατάσταση της εφαρμογής Arduino IDE, τον κώδικα και τον τρόπο που γίνεται **upload** στο ESP8266 καθώς και σχεδιαγράμματα με την συνδεσμολογία των επιμέρους components. 
 
 --- 
 ## Γ' Μέρος - Stack Deployment

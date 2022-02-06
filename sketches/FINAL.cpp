@@ -15,12 +15,12 @@
 #define DOOR D2
 
 // WiFi Credentials
-const char* ssid = "........";  // Update with your SSID
-const char* password = "........"; // Update with your SSID password 
+const char* ssid = pinet;  // Update with your SSID unless you left default settings on hostapd.conf
+const char* password = 12345678; // Update with your SSID password unless you left default settings on hostapd.conf
 // MQTT Broker IP address
 const char* mqtt_server = "broker.mqtt-dashboard.com"; // Update with the IP of MQTT broker
 // Topic for ESP to Subscribe
-const char* ESP_TOPIC = "name/esp_no"; // Update with your basic topic, for example "hua/esp1"
+const char* ESP_TOPIC = "name/esp_no"; // Update with your basic topic and a number for you ESP8266 for example "hua/esp1"
 
 // Create topic names to Publish
 const char* Temperature_Topic = "name/esp_no/temp";     // Update basic topic only for example "hua/esp1/temp"
@@ -80,6 +80,8 @@ void callback(String topic, byte *payload, unsigned int length) {
     if (message == "red off") { digitalWrite(LED_RED, LOW); } 
     if (message == "green on") { digitalWrite(LED_GREEN, HIGH); } 
     if (message == "green off") { digitalWrite(LED_GREEN, LOW); }
+    if (message == "orange on") { digitalWrite(LED_ORANGE, HIGH); } 
+    if (message == "orange off") { digitalWrite(LED_ORANGE, LOW); }
     if (message == "buzzer on") { digitalWrite(BUZZER, HIGH); } 
     if (message == "buzzer off") { digitalWrite(BUZZER, LOW); } 
     Serial.println();

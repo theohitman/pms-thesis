@@ -4,5 +4,4 @@ node-red-contrib-influxdb \
 node-red-dashboard \
 node-red-node-email \
 node-red-node-pi-gpio \
-node-red-node-random \
 node-red-node-twilio
