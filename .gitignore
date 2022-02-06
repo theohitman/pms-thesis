@@ -2,5 +2,3 @@
 .DS_Store
 test_playbook.yml
 config.yml
-deploy-stack.yml
-

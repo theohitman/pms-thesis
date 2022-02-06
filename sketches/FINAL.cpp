@@ -128,6 +128,7 @@ void setup() {
   pinMode(RAIN_SENSOR,INPUT);
   pinMode(MOTION_SENSOR,INPUT);
   pinMode(DOOR,INPUT);
+  digitalWrite(LED_GREEN, HIGH);
 
 }
 

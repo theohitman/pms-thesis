@@ -21,7 +21,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -39,10 +39,6 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "Y2j0PViRk"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -105,7 +101,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "Y2j0PViRk"
+            "uid": "IyPordWRz"
           },
           "dsType": "influxdb",
           "groupBy": [
@@ -154,10 +150,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "Y2j0PViRk"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -224,7 +216,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "Y2j0PViRk"
+            "uid": "IyPordWRz"
           },
           "dsType": "influxdb",
           "groupBy": [
@@ -279,10 +271,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "Y2j0PViRk"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -348,7 +336,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "Y2j0PViRk"
+            "uid": "IyPordWRz"
           },
           "dsType": "influxdb",
           "groupBy": [
@@ -409,10 +397,6 @@
       "type": "gauge"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "Y2j0PViRk"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -478,7 +462,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "Y2j0PViRk"
+            "uid": "IyPordWRz"
           },
           "dsType": "influxdb",
           "groupBy": [
@@ -527,10 +511,6 @@
       "type": "gauge"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "Y2j0PViRk"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -597,7 +577,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "Y2j0PViRk"
+            "uid": "IyPordWRz"
           },
           "dsType": "influxdb",
           "groupBy": [
@@ -2089,6 +2069,6 @@
   "timezone": "",
   "title": "Data Center",
   "uid": "hNefmAkgk",
-  "version": 38,
+  "version": 3,
   "weekStart": ""
 }

@@ -31,7 +31,7 @@
 Προαπαιτούμενα: 
 
 - Raspberry Pi, SD card, καλώδιο ethernet και τροφοδοσία
-- [Raspberry Pi OS](https://www.raspberrypi.com/software/)
+- [Raspberry Pi OS Lite](https://www.raspberrypi.com/software/operating-systems/)
 - SSH key pair ([How To Set up SSH Keys on a Linux / Unix System](https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/)) 
 - Ansible ([Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html#installation-guide))
 - Git ([Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git))
@@ -44,13 +44,13 @@ MacOS
 ```bash
 diskutil list
 diskutil unmountDisk /dev/disk4
-dd if=2021-10-30-raspios-bullseye-armhf-lite.img of=/dev/rdisk4 bs=1m
+dd if=2022-01-28-raspios-bullseye-armhf-lite.img of=/dev/rdisk4 bs=1m
 ```
 
 Linux
 ```bash
 lsblk
-dd if=2021-10-30-raspios-bullseye-armhf-lite.img of=/dev/sdc bs=1m
+dd if=2022-01-28-raspios-bullseye-armhf-lite.img of=/dev/sdc bs=1m
 ```
 
 ### 2. Ενεργοποίηση SSH
@@ -63,7 +63,7 @@ touch /Volumes/boot/ssh
 
 ### 3. Εγκατάσταση του SSH Κey 
 
-Αφού γίνει boot το raspberry τρέχουμε την παρακάτω εντολή. Έτσι θα μπορούμε να κάνουμε login στο raspberry χωρίς να εισάγουμε κωδικό πρόσβασης αλλά με το ιδιωτικό μας κλειδί (SSH key pair). Αν δεν υπάρχει local dns στην υποδομή μας αντί για raspberrypi βάζουμε την IP διεύθυνση που πήρε το raspberry. 
+Αφού γίνει boot το raspberry τρέχουμε την παρακάτω εντολή. Έτσι θα μπορούμε να κάνουμε login στο raspberry χωρίς να εισάγουμε κωδικό πρόσβασης αλλά με το ιδιωτικό μας κλειδί (SSH key pair). Θα μας ζητήσει το default password που είναι το **raspberry**. Αν δεν υπάρχει local dns στην υποδομή μας αντί για raspberrypi βάζουμε την IP διεύθυνση που πήρε το raspberry. 
 
 ```bash
 ssh-copy-id pi@raspberrypi
@@ -118,3 +118,33 @@ ansible-playbook playbooks/docker-install.yml
 
 --- 
 ## Γ' Μέρος - Stack Deployment
+
+### 1. Εγκατάσταση δικτύου αισθητήρων
+
+Θα χρησιμοποιήσουμε την ασύρματη κάρτα δικτύου του raspberry για να υλοποιήσουμε ένα δίκτυο αισθητήρων. Σε αυτό το δίκτυο θα συνδέονται μόνο τα ESP microchips. 
+Με το παρακάτω playbook γίνονται οι εξής ενέργειες στο raspberry:
+
+* Εγκατάσταση πακέτων hostapd και dnsmasq
+* Εκκίνηση της ασύρματης κάρτας δικτύου και ορισμός ip διεύθυνσης σε αυτή
+* Ρυθμίσεις για DHCP server (dnsmasq) που θα μοιράζει ip διευθύνσεις
+* Ρυθμίσεις για access point (hostapd) που θα συνδέονται τα ESP microchips
+
+```bash
+ansible-playbook playbooks/sensor-network.yml
+```
+
+### 2. Εγκατάσταση Telegraf
+
+Με αυτό το playbook εγκαθίσταται στο raspberry το telegraf καθώς και το configuration για την βάση που θα αποθηκεύονται τα metrics κ.ά. Σκοπός του telegraf agent είναι η παρακολούθηση της υγείας του raspberry pi. 
+
+```bash
+ansible-playbook playbooks/telegraf-install.yml
+```
+
+### 3. Ανάπτυξη Stack
+
+Με αυτό το playbook σηκώνονται όλα τα containers με τις εφαρμογές που χρειάζεται το project
+
+```bash
+ansible-playbook playbooks/deploy-stack.yml
+```

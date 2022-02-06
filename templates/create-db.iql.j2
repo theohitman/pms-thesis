@@ -1,0 +1,4 @@
+CREATE DATABASE {{ influxdb_database }}
+CREATE USER {{ influxdb_username }} WITH PASSWORD '{{ influxdb_password }}'
+GRANT ALL ON {{ influxdb_database }} to {{ influxdb_username }}
+CREATE RETENTION POLICY "4Weeks" ON {{ influxdb_database }} DURATION 4w REPLICATION 1 DEFAULT

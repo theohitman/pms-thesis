@@ -44,7 +44,6 @@
     - name: Install docker-compose 
       command:
         cmd: "{{ item }}"
-        creates: "/usr/bin/docker-compose"
       with_items:
         - curl -L "https://github.com/docker/compose/releases/download/v2.2.2/docker-compose-linux-armv7" -o /usr/bin/docker-compose
         - chmod +x /usr/bin/docker-compose
