@@ -1,5 +1,5 @@
 ---
-# Database Name & Credentials for Telegraf Agent to write metrics
+# Database Name & Credentials to write metrics
 influxdb_database: 'database'
 influxdb_username: 'username'
 influxdb_password: 'password'
@@ -7,8 +7,8 @@ influxdb_password: 'password'
 # Docker Variables for containers
 docker:
   influxdb:
-    username: 'administrator' # Influxdb Credentials
+    username: 'administrator' # Influxdb Admin Credentials
     password: 'password'
   grafana:
-    admin_user: 'administrator' # Grafana Credentials
+    admin_user: 'administrator' # Grafana Admin Credentials
     admin_pass: 'password'

@@ -22,7 +22,7 @@
 - Ansible
 - Docker
 
-<img src="images/architecture_overview.png" width=600>
+<img src="images/architecture_overview.png" width=800>
 
 --- 
 ## Α' Μέρος - Προετοιμασία του Raspberry 
@@ -80,9 +80,18 @@ ssh pi@raspberrypi
 sudo timedatectl set-timezone Europe/Athens
 ```
 
-### 5. Εγκατάσταση Docker και Docker-Compose
+### 5. Ορισμός Τοποθεσίας
 
-Από τον υπολογιστή μας κατεβάζουμε το project από το git τοπικά και τρέχουμε το playbook. 
+Από τον υπολογιστή μας κατεβάζουμε το project από το git και γεμίζουμε το αρχείο config.yml με μεταβλητές της επιλογής μας. 
+
+```bash
+git clone https://github.com/theohitman/pms-thesis.git
+cd pms-thesis
+cp config.yml.example config.yml
+```
+
+### 6. Εγκατάσταση Docker και Docker-Compose
+
 Με το παρακάτω playbook γίνονται οι εξής ενέργειες στο raspberry:
 
 * Απενεργοποίηση του password authentication. SSH μόνο με κλειδί (SSH key pair)
@@ -93,8 +102,6 @@ sudo timedatectl set-timezone Europe/Athens
 * Εγκατάσταση docker-compose
 
 ```bash
-git clone https://github.com/theohitman/pms-thesis.git
-cd pms-thesis
 ansible-playbook playbooks/docker-install.yml
 ```
 
@@ -120,6 +127,8 @@ ansible-playbook playbooks/docker-install.yml
 
 --- 
 ## Γ' Μέρος - Stack Deployment
+
+<img src="images/software_stack.png" >
 
 ### 1. Εγκατάσταση δικτύου αισθητήρων
 
@@ -149,4 +158,16 @@ ansible-playbook playbooks/telegraf-install.yml
 
 ```bash
 ansible-playbook playbooks/deploy-stack.yml
+docker ps # Ελέγχουμε ότι είναι up τα containers
 ```
+
+### 4. Τελικές ρυθμίσεις
+
+Το stack έχει πλέον σηκωθεί και απομένουν κάποιες τελευταίες ρυθμίσεις στα επιμέρους components του project. Οι πόρτες που ακούνε οι εφαρμογές φαίνονται στο παρακάτω σχεδιάγραμμα. 
+
+* Στο Node-RED στην καρτέλα InfluxDB επιλέγουμε ένα οποιοδήποτε InfluxDB node και ρυθμίζουμε την **database**, το **username** και **password** που ορίσαμε στο αρχείο config.yml
+* Στο Node-RED στην καρτέλα Alarms θα πρέπει να ορίσουμε email που θέλουμε να έρχονται οι ειδοποιήσεις και κινητό τηλέφωνο στο twillio node αν επιθυμούμε ειδοποιήσεις μέσω sms (απαιτεί λογαριασμό στο [twillio.com](https://www.twillio.com))
+* Στο Grafana πατάμε import και **Upload JSON file**. Στον φάκελο dashboards υπάρχουν τα διαθέσιμα dashboards και επιλέγουμε το **Data Center.json**.
+* Τέλος αρχικοποιούμε τον κωδικό πρόσβασης για τον χρήστη admin στο **Portainer**. 
+
+<img src="images/network.png" width=500>
