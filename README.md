@@ -22,6 +22,8 @@
 - Ansible
 - Docker
 
+<img src="images/architecture_overview.png" width=600>
+
 --- 
 ## Α' Μέρος - Προετοιμασία του Raspberry 
 
@@ -143,7 +145,7 @@ ansible-playbook playbooks/telegraf-install.yml
 
 ### 3. Ανάπτυξη Stack
 
-Με αυτό το playbook σηκώνονται όλα τα containers με τις εφαρμογές που χρειάζεται το project
+Με αυτό το playbook σηκώνονται όλα τα containers με τις εφαρμογές που χρειάζεται το project.
 
 ```bash
 ansible-playbook playbooks/deploy-stack.yml
