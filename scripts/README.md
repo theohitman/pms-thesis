@@ -7,7 +7,7 @@
 ### backup.sh
 ## Διαδικασία Backup
 
-Τα αρχεία του project μπορούν να γίνουν backup σε ένα USB flash drive ή ένα NFS share. Στην διαδικασία που περιγράφεται το backup είναι ημερήσιο ενώ backup παλαιότερα της μιας εβδομάδας διαγράφονται αυτόματα. 
+Για backup ολόκληρου του project αρκεί να έχουμε τον φάκελο **docker** του raspberry. Αυτός μπορεί να αποθηκεύεται σε ένα USB flash drive ή ένα NFS share. Στην διαδικασία που περιγράφεται παρακάτω το backup είναι ημερήσιο ενώ backup παλαιότερα της μιας εβδομάδας διαγράφονται αυτόματα. 
 - [How to mount a USB drive on the Raspberry Pi?](https://raspberrytips.com/mount-usb-drive-raspberry-pi/)
 - [Connecting to an NFS Share on the Raspberry Pi](https://pimylifeup.com/raspberry-pi-nfs-client/)
 

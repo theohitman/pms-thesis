@@ -82,7 +82,7 @@ sudo timedatectl set-timezone Europe/Athens
 
 ### 5. Ενημέρωση Μεταβλητών
 
-Από τον υπολογιστή μας κατεβάζουμε το project από το git και γεμίζουμε το αρχείο config.yml με μεταβλητές της επιλογής μας. 
+Στον υπολογιστή μας κατεβάζουμε το project από το git και γεμίζουμε το αρχείο config.yml με μεταβλητές της επιλογής μας. Οι μεταβλητές αφορούν το όνομα της βάσης και credentials για αυτή καθώς και credentials για την διαχείριση της influxdb και του grafana. 
 
 ```bash
 git clone https://github.com/theohitman/pms-thesis.git
@@ -92,7 +92,7 @@ cp config.yml.example config.yml
 
 ### 6. Εγκατάσταση Docker και Docker-Compose
 
-Με το παρακάτω playbook γίνονται οι εξής ενέργειες στο raspberry:
+Από υπολογιστή που έχουμε εγκατεστημένη την ansible τρέχουμε τρέχουμε τα playbooks. Με το παρακάτω playbook γίνονται οι εξής ενέργειες στο raspberry:
 
 * Απενεργοποίηση του password authentication. SSH μόνο με κλειδί (SSH key pair)
 * Αναβάθμιση όλων των πακέτων του raspberry
@@ -170,5 +170,6 @@ ansible-playbook playbooks/deploy-stack.yml
 * Στο Node-RED στην καρτέλα Alarms θα πρέπει να ορίσουμε email που θέλουμε να έρχονται οι ειδοποιήσεις και κινητό τηλέφωνο στο twillio node αν επιθυμούμε ειδοποιήσεις μέσω sms (απαιτεί λογαριασμό στο [twillio.com](https://www.twillio.com))
 * Στο Grafana πατάμε import και **Upload JSON file**. Στον φάκελο dashboards υπάρχουν τα διαθέσιμα dashboards και επιλέγουμε το **Data Center.json**.
 * Τέλος αρχικοποιούμε τον κωδικό πρόσβασης για τον χρήστη admin στο **Portainer**. 
+* Στον φάκελο [scripts](https://github.com/theohitman/pms-thesis/tree/main/scripts) υπάρχουν οδηγίες για backup και restore ολόκληρου του project
 
 <img src="images/network.png" width=500>
