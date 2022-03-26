@@ -73,7 +73,7 @@ ssh-copy-id pi@raspberrypi
 
 ### 4. Ορισμός Τοποθεσίας
 
-Κάνουμε login στο raspberry τρέχουμε την παρακάτω εντολή ορίζοντας έτσι την τοποθεσία μας ώστε να έχει το raspberry την σωστή ώρα. 
+Κάνουμε login στο raspberry και τρέχουμε την παρακάτω εντολή ορίζοντας έτσι την τοποθεσία μας ώστε να έχει το raspberry την σωστή ώρα. 
 
 ```bash
 ssh pi@raspberrypi
@@ -92,7 +92,7 @@ cp config.yml.example config.yml
 
 ### 6. Εγκατάσταση Docker και Docker-Compose
 
-Από υπολογιστή που έχουμε εγκατεστημένη την ansible τρέχουμε τρέχουμε τα playbooks. Με το παρακάτω playbook γίνονται οι εξής ενέργειες στο raspberry:
+Από υπολογιστή που έχουμε εγκατεστημένη την ansible εκτελούμε τα playbooks. Με το παρακάτω playbook γίνονται οι εξής ενέργειες στο raspberry:
 
 * Απενεργοποίηση του password authentication. SSH μόνο με κλειδί (SSH key pair)
 * Αναβάθμιση όλων των πακέτων του raspberry

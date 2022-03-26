@@ -65,7 +65,7 @@ void setup_wifi() {
   Serial.println(WiFi.localIP());
 }
 
-// Receives MQTT messages to a topic that EPS is subscribed
+// Receives MQTT messages to a topic that ESP is subscribed
 // Prints in serial monitor the message and switches GPIO states if message received   
 void callback(String topic, byte *payload, unsigned int length) {
     Serial.print("Message arrived in topic: ");
