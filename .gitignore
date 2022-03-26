@@ -2,3 +2,4 @@
 .DS_Store
 test_playbook.yml
 config.yml
+*.code-workspace
