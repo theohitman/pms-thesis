@@ -168,6 +168,7 @@ ansible-playbook playbooks/deploy-stack.yml
 
 * Στο Node-RED στην καρτέλα InfluxDB επιλέγουμε ένα οποιοδήποτε InfluxDB node και ρυθμίζουμε την **database**, το **username** και **password** που ορίσαμε στο αρχείο config.yml
 * Στο Node-RED στην καρτέλα Alarms θα πρέπει να ορίσουμε email που θέλουμε να έρχονται οι ειδοποιήσεις και κινητό τηλέφωνο στο twillio node αν επιθυμούμε ειδοποιήσεις μέσω sms (απαιτεί λογαριασμό στο [twillio.com](https://www.twillio.com))
+* Στο Grafana επιλέγουμε configuration > Data sources > **Add data source**. Εδώ επιλέγουμε influxdb και συμπληρώνουμε τα πεδία URL με **http://influxdb:8086** και Database, User και Password με αυτά που συμπληρώσαμε στο αρχείο config.yml
 * Στο Grafana πατάμε import και **Upload JSON file**. Στον φάκελο dashboards υπάρχουν τα διαθέσιμα dashboards και επιλέγουμε το **Data Center.json**.
 * Τέλος αρχικοποιούμε τον κωδικό πρόσβασης για τον χρήστη admin στο **Portainer**. 
 * Στον φάκελο [scripts](https://github.com/theohitman/pms-thesis/tree/main/scripts) υπάρχουν οδηγίες για backup και restore ολόκληρου του project
